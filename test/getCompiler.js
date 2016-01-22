@@ -1,5 +1,5 @@
 /*global beforeEach,afterEach,describe,it*/
-import compile from '../src/getValue'
+import compile from '../src/getCompiler'
 import { reset, check, expect, expectCount } from './helpers/chaiCounter'
 
 beforeEach(reset)
