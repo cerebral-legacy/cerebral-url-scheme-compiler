@@ -5,7 +5,7 @@ The url scheme compiler for Cerebral
 converts a path URL, string or array into an efficient getter function
 
 ```js
-import getCompiler from 'cerebral-url-scheme-compiler/getCompiler';
+import getCompiler from 'cerebral-url-scheme-compiler/get';
 
 // some action factory
 export default function (fromPath) {
@@ -23,7 +23,7 @@ export default function (fromPath) {
 converts a path URL, string or array into an efficient setter function
 
 ```js
-import setCompiler from 'cerebral-url-scheme-compiler/setCompiler';
+import setCompiler from 'cerebral-url-scheme-compiler/set';
 
 // some action factory
 export default function (toPath) {
