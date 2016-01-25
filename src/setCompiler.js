@@ -44,7 +44,7 @@ export default function compile (path) {
           }
         }
       } else {
-        return console.error(`${path} : scheme is not supported, expect "input" or "state".`)
+        return console.error(`${path} : scheme is not supported, expect "output" or "state".`)
       }
     }
   } else if (typeof path === 'function') {
