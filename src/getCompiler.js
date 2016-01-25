@@ -1,4 +1,5 @@
-import { getPathValue } from './objectPath'
+import input from './getters/input'
+import state from './getters/state'
 import parseUrl from './parseUrl'
 
 export default function compile (path, fn = 'get') {
@@ -8,39 +9,18 @@ export default function compile (path, fn = 'get') {
     if (url) {
       const urlPath = (url.path || '').split('.')
       if (url.scheme === 'input' && fn === 'get') {
-        // get the value from the input object
-        return function getInputValue ({ input }) {
-          return getPathValue(input, urlPath)
-        }
+        return input(path, url, urlPath)
       } else if (url.scheme === 'state') {
-        if (url.host === '.') {
-          // get the value from the current module
-          return function fnLocalModuleStateValue ({ module }) {
-            return module.state[fn](urlPath)
-          }
-        } else if (url.host) {
-          // get the value from the named module
-          return function fnModuleStateValue ({ modules }) {
-            const module = modules[url.host]
-            if (!module) {
-              return console.error(`${path} : module was not found.`)
-            }
-            return module.state[fn](urlPath)
-          }
-        } else {
-          // get the value from the global state
-          return function fnStateValue ({ state }) {
-            return state[fn](urlPath)
-          }
-        }
+        return state(path, url, urlPath, fn)
       } else {
         return console.error(`${path} : not supported by state.{fn}().`)
       }
     }
   } else if (typeof path === 'function') {
+    // for functions simply return them
     return path
   }
-  // non-strings and non-urls (probably an array) are passed through to state.get
+  // other values (probably an array or non-url string) are passed through to state.fn
   return function fnState ({ state }) {
     return state[fn](path)
   }
