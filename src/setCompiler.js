@@ -17,12 +17,14 @@ export default function compile (path) {
               : value
           setPathValue(input, urlPath, outputValue)
           output(input)
+          return value
         }
       } else if (url.scheme === 'state') {
         if (url.host === '.') {
           // set the value on the current module
           return function setLocalModuleStateValue ({ module }, value) {
-            return module.state.set(urlPath, value)
+            module.state.set(urlPath, value)
+            return value
           }
         } else if (url.host) {
           // set the value on the named module
@@ -31,12 +33,14 @@ export default function compile (path) {
             if (!module) {
               return console.error(`${path} : module was not found.`)
             }
-            return module.state.set(urlPath, value)
+            module.state.set(urlPath, value)
+            return value
           }
         } else {
           // set the value on the global state
           return function setStateValue ({ state }, value) {
-            return state.set(urlPath, value)
+            state.set(urlPath, value)
+            return value
           }
         }
       } else {
@@ -48,6 +52,7 @@ export default function compile (path) {
   }
   // non-strings and non-urls (probably an array) are passed through to state.get
   return function set ({ state }, value) {
-    return state.set(path, value)
+    state.set(path, value)
+    return value
   }
 }
