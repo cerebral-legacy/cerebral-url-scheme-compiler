@@ -8,7 +8,7 @@ export default function compile (path, fn, isGetter) {
     // check if the string is a url
     const url = parseUrl(path)
     if (url) {
-      const urlPath = (url.path || '').split('.')
+      const urlPath = url.path && url.path.split('.')
       if (url.scheme === 'input' && fn === 'get') {
         return input(path, url, urlPath)
       } else if (url.scheme === 'output' && fn === 'set') {
