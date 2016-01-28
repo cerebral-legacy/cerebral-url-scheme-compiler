@@ -11,7 +11,7 @@ describe('setValue', function () {
 
     const setValue = compile('output:/some.key')
 
-    expect(setValue.name).to.equal('setOutputValue')
+    expect(setValue.name).to.equal('output')
 
     setValue({
       input: {
@@ -33,7 +33,7 @@ describe('setValue', function () {
 
     const setValue = compile(['state', 'key'])
 
-    expect(setValue.name).to.equal('fnState')
+    expect(setValue.displayName).to.equal('state.set')
 
     setValue({
       state: {
@@ -50,7 +50,7 @@ describe('setValue', function () {
 
     const setValue = compile('state:/state.key')
 
-    expect(setValue.name).to.equal('fnStateValue')
+    expect(setValue.displayName).to.equal('state.set')
 
     setValue({
       state: {
@@ -67,7 +67,7 @@ describe('setValue', function () {
 
     const setValue = compile('state://module/state.key')
 
-    expect(setValue.name).to.equal('fnModuleStateValue')
+    expect(setValue.displayName).to.equal('module.state.set')
 
     setValue({
       modules: {
@@ -88,7 +88,7 @@ describe('setValue', function () {
 
     const setValue = compile('state://./state.key')
 
-    expect(setValue.name).to.equal('fnLocalModuleStateValue')
+    expect(setValue.displayName).to.equal('module.state.set')
 
     setValue({
       module: {

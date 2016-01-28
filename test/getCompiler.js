@@ -11,7 +11,7 @@ describe('getValue', function () {
 
     const getValue = compile('input:/some.key')
 
-    expect(getValue.name).to.equal('getInputValue')
+    expect(getValue.name).to.equal('input')
 
     const value = getValue({
       input: {
@@ -29,7 +29,7 @@ describe('getValue', function () {
 
     const getValue = compile(['state', 'key'])
 
-    expect(getValue.name).to.equal('fnState')
+    expect(getValue.displayName).to.equal('state.get')
 
     const value = getValue({
       state: {
@@ -48,7 +48,7 @@ describe('getValue', function () {
 
     const getValue = compile('state:/state.key')
 
-    expect(getValue.name).to.equal('fnStateValue')
+    expect(getValue.displayName).to.equal('state.get')
 
     const value = getValue({
       state: {
@@ -67,7 +67,7 @@ describe('getValue', function () {
 
     const getValue = compile('state://module/state.key')
 
-    expect(getValue.name).to.equal('fnModuleStateValue')
+    expect(getValue.displayName).to.equal('module.state.get')
 
     const value = getValue({
       modules: {
@@ -90,7 +90,7 @@ describe('getValue', function () {
 
     const getValue = compile('state://./state.key')
 
-    expect(getValue.name).to.equal('fnLocalModuleStateValue')
+    expect(getValue.displayName).to.equal('module.state.get')
 
     const value = getValue({
       module: {

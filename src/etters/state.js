@@ -14,22 +14,28 @@ const execute = function (state, values, urlPath, fn, isGetter) {
 export default (path, url, urlPath, fn, isGetter) => {
   if (url.host === '.') {
     // process on the current module
-    return function fnLocalModuleStateValue ({ module }, ...values) {
+    const moduleFn = function moduleState ({ module }, ...values) {
       return execute(module.state, values, urlPath, fn, isGetter)
     }
+    moduleFn.displayName = `module.state.${fn}`
+    return moduleFn
   } else if (url.host) {
     // process on the named module
-    return function fnModuleStateValue ({ modules }, ...values) {
+    const moduleFn = function moduleState ({ modules }, ...values) {
       const module = modules[url.host]
       if (!module) {
         return console.error(`${path} : module was not found.`)
       }
       return execute(module.state, values, urlPath, fn, isGetter)
     }
+    moduleFn.displayName = `module.state.${fn}`
+    return moduleFn
   } else {
     // process on the global state
-    return function fnStateValue ({ state }, ...values) {
+    const stateFn = function state ({ state }, ...values) {
       return execute(state, values, urlPath, fn, isGetter)
     }
+    stateFn.displayName = `state.${fn}`
+    return stateFn
   }
 }

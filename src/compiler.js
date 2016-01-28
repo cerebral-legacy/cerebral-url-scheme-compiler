@@ -24,7 +24,7 @@ export default function compile (path, fn, isGetter) {
     return path
   }
   // other values (probably an array or non-url string) are passed through to state.fn
-  return function fnState ({ state }, ...values) {
+  const stateFn = function state ({ state }, ...values) {
     if (isGetter) {
       return path ? state[fn](path, ...values) : state[fn](...values)
     } else {
@@ -36,4 +36,6 @@ export default function compile (path, fn, isGetter) {
       return values.length === 1 ? values[0] : values
     }
   }
+  stateFn.displayName = `state.${fn}`
+  return stateFn
 }

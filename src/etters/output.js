@@ -1,8 +1,8 @@
 import { setPathValue } from '../objectPath'
 
-export default (path, url, urlPath) =>
+export default (path, url, urlPath) => {
   // add the value to the input object and pass it to output
-  function setOutputValue ({ input, output }, value) {
+  return function output ({ input, output }, value) {
     const outputValue = (value && typeof value.toJS === 'function')
       ? value.toJS()
       : (value && value.constructor === Object && Object.isFrozen(value))
@@ -16,3 +16,4 @@ export default (path, url, urlPath) =>
     }
     return value
   }
+}
