@@ -22,12 +22,12 @@ export default (path, url, urlPath, fn, isGetter) => {
     return moduleFn
   } else if (url.host) {
     // process on the named module
-    const moduleFn = function moduleState ({ modules }, ...values) {
+    const moduleFn = function moduleState ({ modules, state }, ...values) {
       const module = modules[url.host]
       if (!module) {
         return console.error(`${path} : module was not found.`)
       }
-      return execute(module.state, values, urlPath, fn, isGetter)
+      return execute(state, values, [...module.path, ...urlPath], fn, isGetter)
     }
     moduleFn.displayName = `module.state.${fn}`
     return moduleFn

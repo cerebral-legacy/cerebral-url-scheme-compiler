@@ -72,12 +72,13 @@ describe('getValue', function () {
     const value = getValue({
       modules: {
         module: {
-          state: {
-            get (path) {
-              expect(path).to.eql(['state', 'key'])
-              return 'stateValue'
-            }
-          }
+          path: ['module']
+        }
+      },
+      state: {
+        get (path) {
+          expect(path).to.eql(['module', 'state', 'key'])
+          return 'stateValue'
         }
       }
     })

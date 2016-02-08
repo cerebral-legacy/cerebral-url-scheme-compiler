@@ -72,12 +72,13 @@ describe('setValue', function () {
     setValue({
       modules: {
         module: {
-          state: {
-            set (path, value) {
-              expect(path).to.eql(['state', 'key'])
-              expect(value).to.equal('value')
-            }
-          }
+          path: ['module']
+        }
+      },
+      state: {
+        set (path, value) {
+          expect(path).to.eql(['module', 'state', 'key'])
+          expect(value).to.equal('value')
         }
       }
     }, 'value')
