@@ -1,6 +1,6 @@
 {
   "name": "cerebral-url-scheme-compiler",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "A url scheme compiler for Cerebral",
   "main": "index.js",
   "scripts": {
