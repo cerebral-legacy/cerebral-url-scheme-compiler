@@ -12,15 +12,7 @@ const execute = function (state, values, urlPath, fn, isGetter) {
 }
 
 export default (path, url, urlPath, fn, isGetter) => {
-  if (url.host === '.') {
-    console.warn('cerebral-url-scheme-compiler: state://./ is DEPRECATED. Please use state://module-name/ instead')
-    // process on the current module
-    const moduleFn = function moduleState ({ module }, ...values) {
-      return execute(module.state, values, urlPath, fn, isGetter)
-    }
-    moduleFn.displayName = `module.state.${fn}`
-    return moduleFn
-  } else if (url.host) {
+  if (url.host) {
     // process on the named module
     const moduleFn = function moduleState ({ modules, state }, ...values) {
       const module = modules[url.host]

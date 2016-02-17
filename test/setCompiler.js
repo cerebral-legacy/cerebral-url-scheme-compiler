@@ -83,23 +83,4 @@ describe('setValue', function () {
       }
     }, 'value')
   })
-
-  it('should set a value on current module state', function () {
-    expectCount(3)
-
-    const setValue = compile('state://./state.key')
-
-    expect(setValue.displayName).to.equal('module.state.set')
-
-    setValue({
-      module: {
-        state: {
-          set (path, value) {
-            expect(path).to.eql(['state', 'key'])
-            expect(value).to.equal('value')
-          }
-        }
-      }
-    }, 'value')
-  })
 })

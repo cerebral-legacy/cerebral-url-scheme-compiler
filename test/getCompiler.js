@@ -85,25 +85,4 @@ describe('getValue', function () {
 
     expect(value).to.equal('stateValue')
   })
-
-  it('should get a value from current module state', function () {
-    expectCount(3)
-
-    const getValue = compile('state://./state.key')
-
-    expect(getValue.displayName).to.equal('module.state.get')
-
-    const value = getValue({
-      module: {
-        state: {
-          get (path) {
-            expect(path).to.eql(['state', 'key'])
-            return 'stateValue'
-          }
-        }
-      }
-    })
-
-    expect(value).to.equal('stateValue')
-  })
 })
