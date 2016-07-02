@@ -1,9 +1,10 @@
 export function getPathValue (obj, path) {
   let value
   if (obj && path) {
-    if (Array.isArray(path)) {
+    if (typeof path === 'string' && path.indexOf('.') !== -1) {
       value = obj
-      path.forEach(key => {
+      const keys = path.split('.')
+      keys.forEach((key) => {
         if (value) {
           value = value[key]
         }
@@ -17,10 +18,11 @@ export function getPathValue (obj, path) {
 
 export function setPathValue (obj, path, value) {
   if (obj && path) {
-    if (Array.isArray(path)) {
+    if (typeof path === 'string' && path.indexOf('.') !== -1) {
       let node = obj
-      path.forEach((key, index) => {
-        node = node[key] = index + 1 < path.length ? node[key] || {} : value
+      const keys = path.split('.')
+      keys.forEach((key, index) => {
+        node = node[key] = index + 1 < keys.length ? node[key] || {} : value
       })
     } else {
       obj[path] = value

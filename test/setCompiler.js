@@ -9,7 +9,7 @@ describe('setValue', function () {
   it('should set a value on output', function () {
     expectCount(2)
 
-    const setValue = compile('output:/some.key')
+    const setValue = compile('output:some.key')
 
     expect(setValue.name).to.equal('output')
 
@@ -28,56 +28,17 @@ describe('setValue', function () {
     }, 'value')
   })
 
-  it('should set a value on state when given an array', function () {
-    expectCount(3)
-
-    const setValue = compile(['state', 'key'])
-
-    expect(setValue.displayName).to.equal('state.set')
-
-    setValue({
-      state: {
-        set (path, value) {
-          expect(path).to.eql(['state', 'key'])
-          expect(value).to.equal('value')
-        }
-      }
-    }, 'value')
-  })
-
   it('should set a value on state when given a url', function () {
     expectCount(3)
 
-    const setValue = compile('state:/state.key')
+    const setValue = compile('state:state.key')
 
     expect(setValue.displayName).to.equal('state.set')
 
     setValue({
       state: {
         set (path, value) {
-          expect(path).to.eql(['state', 'key'])
-          expect(value).to.equal('value')
-        }
-      }
-    }, 'value')
-  })
-
-  it('should set a value on module state', function () {
-    expectCount(3)
-
-    const setValue = compile('state://module/state.key')
-
-    expect(setValue.displayName).to.equal('module.state.set')
-
-    setValue({
-      modules: {
-        module: {
-          path: ['module']
-        }
-      },
-      state: {
-        set (path, value) {
-          expect(path).to.eql(['module', 'state', 'key'])
+          expect(path).to.equal('state.key')
           expect(value).to.equal('value')
         }
       }

@@ -1,6 +1,6 @@
-import input from './etters/input'
-import output from './etters/output'
-import state from './etters/state'
+import input from './input'
+import output from './output'
+import state from './state'
 import parseUrl from './parseUrl'
 
 export default function compile (path, fn, isGetter) {
@@ -8,13 +8,12 @@ export default function compile (path, fn, isGetter) {
     // check if the string is a url
     const url = parseUrl(path)
     if (url) {
-      const urlPath = (url.path && url.path.split('.')) || []
       if (url.scheme === 'input' && fn === 'get') {
-        return input(path, url, urlPath)
+        return input(url)
       } else if (url.scheme === 'output' && fn === 'set') {
-        return output(path, url, urlPath)
+        return output(url)
       } else if (url.scheme === 'state') {
-        return state(path, url, urlPath, fn, isGetter)
+        return state(url, fn, isGetter)
       } else {
         return console.error(`${path} : not supported by input, output or state.${fn}`)
       }
