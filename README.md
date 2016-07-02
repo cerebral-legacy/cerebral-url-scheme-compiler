@@ -1,4 +1,4 @@
-# cerebral-url-scheme-compiler
+# cerebral-url-scheme-compiler [![Build Status](https://secure.travis-ci.org/cerebral/cerebral-url-scheme-compiler.png?branch=master)](https://travis-ci.org/cerebral/cerebral-url-scheme-compiler)
 The url scheme compiler for Cerebral
 
 ### getCompiler
