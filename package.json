@@ -1,6 +1,6 @@
 {
   "name": "cerebral-url-scheme-compiler",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "A url scheme compiler for Cerebral",
   "main": "index.js",
   "scripts": {
@@ -37,5 +37,8 @@
     "snazzy": "^4.0.0",
     "standard": "^7.1.2",
     "watch": "^0.19.1"
+  },
+  "dependencies": {
+    "lodash": "^4.13.1"
   }
 }

@@ -1,4 +1,4 @@
-import { setPathValue } from './objectPath'
+import set from 'lodash/set'
 
 export default (url) => {
   // add the value to the input object and pass it to output
@@ -8,7 +8,7 @@ export default (url) => {
       : (value && value.constructor === Object && Object.isFrozen(value))
         ? JSON.parse(JSON.stringify(value))
         : value
-    setPathValue(input, url.path, outputValue)
+    set(input, url.path, outputValue)
     output(input)
     return value
   }
