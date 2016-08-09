@@ -1,9 +1,10 @@
-export default (url, fn, isGetter) => {
-  const stateFn = function state ({ state }, ...values) {
+export default (fragments, fn, isGetter) => {
+  const stateFn = function state (args, ...values) {
+    const path = fragments.reduce((url, fragment) => url + fragment(args), '')
     if (isGetter) {
-      return state[fn](url.path, ...values)
+      return args.state[fn](path, ...values)
     } else {
-      state[fn](url.path, ...values)
+      args.state[fn](path, ...values)
       return values.length === 1 ? values[0] : values
     }
   }

@@ -24,6 +24,25 @@ describe('getValue', function () {
     expect(value).to.equal('inputValue')
   })
 
+  it('should get a value from input using a template', function () {
+    expectCount(2)
+
+    const getValue = compile('input:some.{{input:thing}}')
+
+    expect(getValue.name).to.equal('input')
+
+    const value = getValue({
+      input: {
+        thing: 'key',
+        some: {
+          key: 'inputValue'
+        }
+      }
+    })
+
+    expect(value).to.equal('inputValue')
+  })
+
   it('should get a value from state when given a url', function () {
     expectCount(3)
 
@@ -36,6 +55,27 @@ describe('getValue', function () {
         get (path) {
           expect(path).to.equal('state.key')
           return 'stateValue'
+        }
+      }
+    })
+
+    expect(value).to.equal('stateValue')
+  })
+
+  it('should get a value from state when given a url template', function () {
+    expectCount(1)
+
+    const getValue = compile('state:state.{{state:thing}}')
+
+    const value = getValue({
+      state: {
+        get (path) {
+          switch (path) {
+            case 'state.key':
+              return 'stateValue'
+            case 'thing':
+              return 'key'
+          }
         }
       }
     })

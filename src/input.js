@@ -1,8 +1,8 @@
 import get from 'lodash/get'
 
-export default (url) => {
+export default (fragments) => {
   // get the value from the input object
-  return function input ({ input }) {
-    return get(input, url.path)
+  return function input (args) {
+    return get(args.input, fragments.reduce((url, fragment) => url + fragment(args), ''))
   }
 }
