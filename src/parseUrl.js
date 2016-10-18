@@ -1,8 +1,8 @@
 
 const schemePattern = '(\\w+):'
-const urlPattern = schemePattern + '([\\w\\.]+)'
+const urlPattern = schemePattern + '([^{}]+)'
 const urlRegex = new RegExp('^' + urlPattern + '$')
-const templateRegex = new RegExp('((^' + schemePattern + ')|({{' + urlPattern + '}})|([\\w\\.:]+))', 'g')
+const templateRegex = new RegExp('((^' + schemePattern + ')|({{' + urlPattern + '}})|(([^{}]|:)+))', 'g')
 const urlFrangmentRegex = new RegExp('^{{' + urlPattern + '}}$')
 
 export default function parseUrl (url) {

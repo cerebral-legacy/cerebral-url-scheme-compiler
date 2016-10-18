@@ -38,6 +38,18 @@ describe('parseUrl', function () {
     ])
   })
 
+  it('should parse a url with other chars', function () {
+    const url = parseUrl('state:$%root.{{input:parent&*.key}}')
+    expect(url.scheme).to.equal('state')
+    expect(url.fragments).to.eql([
+      '$%root.',
+      {
+        scheme: 'input',
+        fragments: ['parent&*.key']
+      }
+    ])
+  })
+
   it('should not parse a url without scheme', function () {
     expect(parseUrl(':')).to.be.null
     expect(parseUrl('')).to.be.null
