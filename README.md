@@ -1,5 +1,7 @@
 # cerebral-url-scheme-compiler [![Build Status](https://secure.travis-ci.org/cerebral/cerebral-url-scheme-compiler.png?branch=master)](https://travis-ci.org/cerebral/cerebral-url-scheme-compiler)
-The url scheme compiler for Cerebral
+The url scheme compiler for Cerebral 1.x
+
+Cerebral 2 doesn't use it anymore.
 
 ### getCompiler
 converts a path URL into an efficient getter function
