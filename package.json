@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cerebral/cerebral-url-scheme-compiler.git"
+    "url": "git+https://github.com/cerebral-legacy/cerebral-url-scheme-compiler.git"
   },
   "keywords": [
     "cerebral",
@@ -23,9 +23,9 @@
   "author": "Christian Alfoni",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/cerebral/cerebral-url-scheme-compiler/issues"
+    "url": "https://github.com/cerebral-legacy/cerebral-url-scheme-compiler/issues"
   },
-  "homepage": "https://github.com/cerebral/cerebral-url-scheme-compiler#readme",
+  "homepage": "https://github.com/cerebral-legacy/cerebral-url-scheme-compiler#readme",
   "devDependencies": {
     "babel-cli": "^6.10.1",
     "babel-core": "^6.10.4",
